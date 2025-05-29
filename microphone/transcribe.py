@@ -12,17 +12,17 @@ def transcribe_audio(audio_path, model_name="turbo") -> str | list[str] | None:
         audio_path (str): The path to the input audio file.
         model_name (str): The name of the Whisper model to use. Defaults to "turbo".
     """
-    print(f"Loading Whisper model: {model_name}...")
+    logging.info(f"Loading Whisper model: {model_name}...")
     try:
         model = whisper.load_model(name=model_name)
     except Exception as e:
-        print("Please ensure you have a valid model name (e.g., tiny, base, small, medium, large, turbo).")
+        logging.info("Please ensure you have a valid model name (e.g., tiny, base, small, medium, large, turbo).")
         raise RuntimeError(f"Error loading Whisper model '{model_name}': {e}")
 
     if not os.path.exists(audio_path):
         raise RuntimeError(f"Error: Audio file not found at '{audio_path}'")
 
-    print(f"Transcribing audio file: {audio_path}...")
+    logging.info(f"Transcribing audio file: {audio_path}...")
     try:
         result = whisper.transcribe(model=model, audio=audio_path)
         transcribed_text = result["text"]
@@ -31,13 +31,13 @@ def transcribe_audio(audio_path, model_name="turbo") -> str | list[str] | None:
     return transcribed_text
 
 def save_to_file(transcribed_text: str, output_path: str):
-    print(f"Transcription complete. Saving to: {output_path}")
+    logging.info(f"Transcription complete. Saving to: {output_path}")
     try:
         with open(output_path, "w", encoding="utf-8") as f:
             f.write(transcribed_text)
-        print("Successfully saved transcription.")
+        logging.info("Successfully saved transcription.")
     except IOError as e:
-        print(f"Error writing to output file '{output_path}': {e}")
+        logging.info(f"Error writing to output file '{output_path}': {e}")
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Transcribe an audio file using OpenAI Whisper.")
