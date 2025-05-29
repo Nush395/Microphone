@@ -1,0 +1,5 @@
+dependencies = [
+    "absl-py>=2.0.0",
+    "openai-whisper",
+    "setuptools;python_version>='3.10'",
+]
