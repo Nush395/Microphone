@@ -1,5 +1,17 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "Microphone"
+version = "0.0.1"
+description = "Audio transcription tool."
+readme = "README.md"
+requires-python = ">=3.10"
+authors = [
+  { name = "Anushan Fernando", email = "anushan395@hotmail.co.uk" }
+]
 dependencies = [
-    "absl-py>=2.0.0",
-    "openai-whisper",
-    "setuptools;python_version>='3.10'",
+  "absl-py>=2.0.0",
+  "openai-whisper",
 ]
